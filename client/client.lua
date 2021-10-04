@@ -1,7 +1,6 @@
 screenshot = {}
-local WebHook = 'https://discord.com/api/webhooks/894381817992454154/oBtR1Qb7z659kb_XXrZQWL84NJiWZ7cgi1fyg96kVMnF6QPtRQZVVTPdaNSCM6WX-GnR'
 local show = false
-RegisterCommand("SC", function()
+RegisterCommand("impound", function()
         local vehicle = QBCore.Functions.GetClosestVehicle()
         local plate = GetVehicleNumberPlateText(vehicle)
         for k,v in pairs(Depots) do
