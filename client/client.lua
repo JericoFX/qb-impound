@@ -59,7 +59,8 @@ RegisterNUICallback('Camera', function(data, cb)
         exports['screenshot-basic']:requestScreenshotUpload(WebHook, "files[]",function(data)
                 local image = json.decode(data)
                 cb(json.encode(image.attachments[1].proxy_url))
-            end)
+        end)
+        cb({})
 end)
 
 -- CHECK IF THE VEHICLE IS OUT
