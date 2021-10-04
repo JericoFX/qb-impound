@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <!--
+    WARNING! Make sure that you match all Quasar related
+    tags to the same version! (Below it's "@2.1.0")
+  -->
+
+  <head>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@^6.0.0/css/materialdesignicons.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.prod.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+  </head>
+
+  <body>
+    <!-- example of injection point where you write your app template -->
+    <div id="q-app">
+      <div @keyup.esc="ByeBye()" tabindex="0">
+        <div v-if="show">
+          <div class="component_1 non-selectable">
+            <div class="body"></div>
+            <div class="rectangle_1"></div>
+            <div class="rectangle_2"></div>
+            <div class="title">
+              <div class="titlerectangle"></div>
+              <span class="impound_menu">IMPOUND MENU</span>
+            </div>
+            <div class="notesgroud">
+              <span class="notes_">Notes:</span>
+              <div class="notesholder">
+                <q-input v-model="text" type="text" label="Notes" />
+              </div>
+            </div>
+            <div class="notesclass"></div>
+            <div class="impoundbutton"></div>
+            <span class="plate____plate__">Plate: {{plate}}</span>
+            <div class="takescreen text-center">
+              <q-btn flat  class="fit" label="Screenshot" @click="Push" />
+            </div>
+           
+            <span class="impound" ><q-btn flat class="fit" label="Impound" @click="radio" /></span>
+
+           
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add the following at the end of your body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/quasar.umd.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.1.0/dist/icon-set/mdi-v6.umd.prod.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js"
+      integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="main.js"></script>
+
+    <style></style>
+  </body>
+</html>
