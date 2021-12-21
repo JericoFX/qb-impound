@@ -1,3 +1,5 @@
+local QBCore = exports['qb-core'].GetCoreObject()
+
 RegisterNetEvent('Imagetest')
 AddEventHandler('Imagetest', function(plate, img, notes)
 if plate then
