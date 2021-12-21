@@ -1,3 +1,5 @@
+
+local QBCore = exports['qb-core'].GetCoreObject()
 screenshot = {}
 local show = false
 RegisterCommand("impound", function()
