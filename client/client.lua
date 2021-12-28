@@ -2,9 +2,32 @@
 local QBCore = exports['qb-core'].GetCoreObject()
 screenshot = {}
 local show = false
+local PlayerData = {}
+RegisterNetEvent('QBCore:Client:OnPlayerLoaded')
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function()
+    PlayerData = QBCore.Functions.GetPlayerData()
+end)
+
+RegisterNetEvent('QBCore:Client:OnJobUpdate')
+AddEventHandler('QBCore:Client:OnJobUpdate', function(JobInfo)
+    PlayerData.job = JobInfo
+end)
+
+CreateThread(function()
+     Wait(500)
+     local p = promise:new()
+     if not PlayerData then
+      PlayerData = QBCore.Functions.GetPlayerData()
+      PlayerData.job = QBCore.Functions.GetPlayerData().job
+      p.resolve(PlayerData)
+     end
+  Citizen.Await(p)
+end)
+
 RegisterCommand("impound", function()
         local vehicle = QBCore.Functions.GetClosestVehicle()
         local plate = GetVehicleNumberPlateText(vehicle)
+                if PlayerData.job.name == "police" then
         for k,v in pairs(Depots) do
             SendNUIMessage({show = not show,
                 plate = plate,
@@ -15,6 +38,9 @@ RegisterCommand("impound", function()
             })
         end
         SetNuiFocus(true, true)
+                        else
+                        QBCore.Functions.Notify("You are not a police","error")
+                        end
 end, false)
 
 RegisterNUICallback('GetData', function(data, cb)
@@ -67,15 +93,17 @@ end)
 
 -- CHECK IF THE VEHICLE IS OUT
 function VehicleExist(plate,cb)
+        local p = promise.new()
     local pool = GetGamePool("CVehicle")
     for i = 0, #pool do
         local Plate = pool[i]
         if DoesEntityExist(Plate) then
             if GetVehicleNumberPlateText(Plate) == plate then
-                cb(true)
+                p:resolve(true)
             else
-                cb(false)
+                p:reject(false)
             end
         end
     end
+        cb(Citizen.Await(p)) -- Grande el Guille por el resource de el y mostrarme este codigo!
 end
