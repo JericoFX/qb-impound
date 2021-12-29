@@ -15,13 +15,8 @@ end)
 
 CreateThread(function()
      Wait(500)
-     local p = promise:new()
-     if not PlayerData then
       PlayerData = QBCore.Functions.GetPlayerData()
       PlayerData.job = QBCore.Functions.GetPlayerData().job
-      p.resolve(PlayerData)
-     end
-  Citizen.Await(p)
 end)
 
 RegisterCommand("impound", function()
@@ -93,17 +88,15 @@ end)
 
 -- CHECK IF THE VEHICLE IS OUT
 function VehicleExist(plate,cb)
-        local p = promise.new()
     local pool = GetGamePool("CVehicle")
     for i = 0, #pool do
         local Plate = pool[i]
         if DoesEntityExist(Plate) then
             if GetVehicleNumberPlateText(Plate) == plate then
-                p:resolve(true)
+               cb(true)
             else
-                p:reject(false)
+               cb(false)
             end
         end
-    end
-        cb(Citizen.Await(p)) -- Grande el Guille por el resource de el y mostrarme este codigo!
+    end 
 end
